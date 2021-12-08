@@ -24,15 +24,19 @@ def main():
     pause = True
     run = True
     random_colour_toggle = True
+    prob = False
     while run:
         surface.fill(black)
-        Grid.rules(dead_colour=dead_colour, alive_colour=alive_colour, surface=surface, pause=pause, random_colour_toggle=random_colour_toggle)
+        Grid.rules(dead_colour=dead_colour, alive_colour=alive_colour, surface=surface, pause=pause, random_colour_toggle=random_colour_toggle, prob=prob)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:
                     pause = not pause
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_x:
+                    prob = not prob
             elif pygame.mouse.get_pressed()[0]:
                 mouse_X, mouse_Y = pygame.mouse.get_pos()
                 Grid.mouse_click_left(mouse_X, mouse_Y)
@@ -54,6 +58,7 @@ def main():
                 Grid.blank_array()
                 pause = True
                 random_colour_toggle = True
+                prob = False
             
 
         if event.type == pygame.KEYUP:

@@ -22,18 +22,27 @@ class Grid:
                 self.grid_array[i][j] = 0
 
 
-    def rules(self, dead_colour, alive_colour, surface, pause, random_colour_toggle):
+    def rules(self, dead_colour, alive_colour, surface, pause, random_colour_toggle, prob):
         for i in range(self.rows):
             for j in range(self.columns):
                 random_colour = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+                random_chance = random.randint(0, 10000)
                 i_pos = i * self.scale
                 j_pos = j * self.scale
                 
+                if prob == True:
+                    if random_chance == 1 and self.grid_array[i][j] == 0:
+                        self.grid_array[i][j] = 1
+                    elif random_chance == 1 and self.grid_array[i][j] == 1:
+                        self.grid_array[i][j] = 0
+                    
+
                 if random_colour_toggle == False:
                     if self.grid_array[i][j] == 1:
                         pygame.draw.rect(surface, random_colour, [i_pos, j_pos, self.scale - self.offset, self.scale - self.offset])
                     else:
                         pygame.draw.rect(surface, dead_colour, [i_pos, j_pos, self.scale - self.offset, self.scale - self.offset])
+                
                 else:
                     if self.grid_array[i][j] == 1:
                         pygame.draw.rect(surface, alive_colour, [i_pos, j_pos, self.scale - self.offset, self.scale - self.offset])
