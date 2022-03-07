@@ -4,8 +4,8 @@ import random
 import pygame
 import rules
 
-width = 1920
-height = 1080
+width = 1600
+height = 900
 size = (width, height)
 scale = 30
 offset = 1
